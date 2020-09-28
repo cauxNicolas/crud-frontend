@@ -1,11 +1,28 @@
 import React from "react";
 import { Link } from "react-router-dom";
+// componenents
+import Input from "../components/Input";
+import Textarea from "../components/Textarea";
 
 const Signup = () => {
   return (
-    <div>
-      <Link to="/">retour vers la home</Link>
-      <p>Vous êtes sur la page signup</p>
+    <div id="main">
+      <div className="bott60">
+        <h1>Inscrivez-vous</h1>
+      </div>
+      <form>
+        <Input type="text" placeholder="votre nom" />
+        <Input type="text" placeholder="votre prénom" />
+        <Input type="email" placeholder="votre email" />
+        <Textarea placeholder="à propose de vous ..." rows="5" />
+        <Input type="password" placeholder="votre mot de passe" />
+        <Input type="password" placeholder="confirmez votre mot de passe" />
+        <Input type="submit" value="S'inscrire" />
+      </form>
+
+      <Link to="/" className="signupLink">
+        retour vers la connexion ? cliquez ici
+      </Link>
     </div>
   );
 };
