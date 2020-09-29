@@ -89,6 +89,11 @@ input[type="submit"]:active {
   flex-direction: column;
 }
 
+#login {
+  display: flex;
+  flex-direction: column;
+}
+
 .signupLink {
   color: grey;
   transition: 0.3s;
@@ -97,4 +102,36 @@ input[type="submit"]:active {
 .signupLink:hover {
   color: black;
   transition: 0.3s;
+}
+
+/* PAGE SIGNUP */
+#signup > div input:first-child {
+  margin-right: 20px;
+}
+
+#signup input[type="email"],
+#signup textarea {
+  width: 540px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+  /* SIGNUP */
+  .flex {
+    flex-direction: column;
+  }
+  form#signup {
+    padding: 0 20px;
+  }
+  input,
+  textarea {
+    width: 300px;
+  }
+  #signup input[type="email"],
+  #signup textarea {
+    width: 300px;
+  }
+  input[type="submit"] {
+    width: 325px;
+  }
 }

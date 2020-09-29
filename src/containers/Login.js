@@ -9,7 +9,7 @@ const Login = () => {
       <div className="bott60">
         <h1>Bienvenue sur la home page Login</h1>
       </div>
-      <form>
+      <form id="login">
         <Input type="email" placeholder="votre email" />
         <Input type="password" placeholder="votre mot de passe" />
         <Input type="submit" value="Valider" />

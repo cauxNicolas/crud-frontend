@@ -10,13 +10,17 @@ const Signup = () => {
       <div className="bott60">
         <h1>Inscrivez-vous</h1>
       </div>
-      <form>
-        <Input type="text" placeholder="votre nom" />
-        <Input type="text" placeholder="votre prénom" />
+      <form id="signup">
+        <div className="flex">
+          <Input type="text" placeholder="votre nom" />
+          <Input type="text" placeholder="votre prénom" />
+        </div>
         <Input type="email" placeholder="votre email" />
         <Textarea placeholder="à propose de vous ..." rows="5" />
-        <Input type="password" placeholder="votre mot de passe" />
-        <Input type="password" placeholder="confirmez votre mot de passe" />
+        <div className="flex">
+          <Input type="password" placeholder="votre mot de passe" />
+          <Input type="password" placeholder="confirmez votre mot de passe" />
+        </div>
         <Input type="submit" value="S'inscrire" />
       </form>
 
