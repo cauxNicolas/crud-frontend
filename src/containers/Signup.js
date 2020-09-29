@@ -3,14 +3,16 @@ import { Link } from "react-router-dom";
 // componenents
 import Input from "../components/Input";
 import Textarea from "../components/Textarea";
+// bdd
+import axios from "axios";
 
 const Signup = () => {
-  const [name, setName] = useState("");
-  const [lastname, setLastname] = useState("");
-  const [email, setEmail] = useState("");
-  const [textarea, setTextarea] = useState("");
-  const [password, setPassword] = useState("");
-  const [confirmPassword, setConfirmPassword] = useState("");
+  const [name, setName] = useState("a");
+  const [lastname, setLastname] = useState("a");
+  const [email, setEmail] = useState("a@a.fr");
+  const [textarea, setTextarea] = useState("aaaa");
+  const [password, setPassword] = useState("a");
+  const [confirmPassword, setConfirmPassword] = useState("a");
   // error
   const [errorName, setErrorName] = useState(false);
   const [errorLastname, setErrorLastname] = useState(false);
@@ -45,7 +47,7 @@ const Signup = () => {
   };
 
   // soumission du formulaire
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     if (
       name !== "" &&
@@ -55,7 +57,19 @@ const Signup = () => {
       password !== "" &&
       confirmPassword !== ""
     ) {
-      alert("inscription ok");
+      try {
+        const response = await axios.post("http://localhost:3100/signup", {
+          name,
+          lastname,
+          email,
+          textarea,
+          password,
+          confirmPassword,
+        });
+        console.log("->", response.data);
+      } catch (error) {
+        console.log(error.response);
+      }
     } else {
       if (name === "") {
         setErrorName(true);
