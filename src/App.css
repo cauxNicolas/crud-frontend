@@ -41,6 +41,9 @@ textarea {
   resize: none;
   font-family: "Montserrat", sans-serif;
 }
+input {
+  height: 25px;
+}
 
 input::placeholder,
 textarea::placeholder {
@@ -56,6 +59,7 @@ input[type="submit"] {
   background-color: #202020;
   color: white;
   cursor: pointer;
+  height: 45px;
 }
 
 input[type="submit"]:hover {
@@ -116,13 +120,14 @@ input[type="submit"]:active {
 }
 
 /* ERROR LOGIN */
-.errorEmail,
-.errorPassword {
+.errorInput {
   border: 1px solid red;
 }
 .error {
   color: red;
   margin-top: 5px;
+  font-size: 0.675rem;
+  font-weight: 600;
 }
 
 /* RESPONSIVE */

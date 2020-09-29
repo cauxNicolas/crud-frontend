@@ -16,7 +16,7 @@ const Login = () => {
   const handlePassword = (event) => {
     setpassword(event.target.value);
   };
-
+  // soumission du formulaire
   const handleSubmit = (event) => {
     event.preventDefault();
     if (email !== "" && password !== "") {
@@ -44,7 +44,7 @@ const Login = () => {
           placeholder="votre email"
           value={email}
           onChange={handleEmail}
-          className={errorEmail === true ? "errorEmail" : null}
+          className={errorEmail === true ? "errorInput" : null}
         />
         {errorEmail && <p className="error">merci de remplir l'email</p>}
         <Input
@@ -52,7 +52,7 @@ const Login = () => {
           placeholder="votre mot de passe"
           value={password}
           onChange={handlePassword}
-          className={errorPassword === true ? "errorPassword" : null}
+          className={errorPassword === true ? "errorInput" : null}
         />
         {errorPassword && (
           <p className="error">merci de remplir le mot de passe</p>
