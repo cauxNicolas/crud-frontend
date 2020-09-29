@@ -37,7 +37,7 @@ textarea {
   font-size: 1rem;
   width: 250px;
   border: 1px solid #dadada;
-  margin-bottom: 20px;
+  margin-top: 20px;
   resize: none;
   font-family: "Montserrat", sans-serif;
 }
@@ -97,6 +97,7 @@ input[type="submit"]:active {
 .signupLink {
   color: grey;
   transition: 0.3s;
+  margin-top: 20px;
 }
 
 .signupLink:hover {
@@ -112,6 +113,16 @@ input[type="submit"]:active {
 #signup input[type="email"],
 #signup textarea {
   width: 540px;
+}
+
+/* ERROR LOGIN */
+.errorEmail,
+.errorPassword {
+  border: 1px solid red;
+}
+.error {
+  color: red;
+  margin-top: 5px;
 }
 
 /* RESPONSIVE */

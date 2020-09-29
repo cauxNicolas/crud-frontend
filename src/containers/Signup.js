@@ -5,12 +5,17 @@ import Input from "../components/Input";
 import Textarea from "../components/Textarea";
 
 const Signup = () => {
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    alert("submit");
+  };
+
   return (
     <div id="main">
       <div className="bott60">
         <h1>Inscrivez-vous</h1>
       </div>
-      <form id="signup">
+      <form id="signup" onSubmit={handleSubmit}>
         <div className="flex">
           <Input type="text" placeholder="votre nom" />
           <Input type="text" placeholder="votre prénom" />
