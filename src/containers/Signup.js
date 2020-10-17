@@ -20,6 +20,7 @@ const Signup = () => {
   const [errorTextarea, setErrorTextarea] = useState(false);
   const [errorPassword, setErrorPassword] = useState(false);
   const [errorConfirmPassword, setErrorConfirmPassword] = useState(false);
+  const [passwordEgalConfirm, setPasswordEgalConfirm] = useState(false);
 
   // on récupère les valeurs
   const handleName = (event) => {
@@ -50,6 +51,7 @@ const Signup = () => {
   const handleSubmit = async (event) => {
     event.preventDefault();
     if (
+      // contrôle des champs vides
       name !== "" &&
       lastname !== "" &&
       email !== "" &&
@@ -57,18 +59,22 @@ const Signup = () => {
       password !== "" &&
       confirmPassword !== ""
     ) {
-      try {
-        const response = await axios.post("http://localhost:3100/signup", {
-          name,
-          lastname,
-          email,
-          textarea,
-          password,
-          confirmPassword,
-        });
-        console.log("->", response.data);
-      } catch (error) {
-        console.log(error.response);
+      if (password === confirmPassword) {
+        try {
+          const response = await axios.post("http://localhost:3100/signup", {
+            name,
+            lastname,
+            email,
+            textarea,
+            password,
+            confirmPassword,
+          });
+          console.log("->", response.data);
+        } catch (error) {
+          console.log(error.response);
+        }
+      } else {
+        setPasswordEgalConfirm(true);
       }
     } else {
       if (name === "") {
@@ -148,9 +154,13 @@ const Signup = () => {
               value={password}
               onChange={handlePassword}
               className={errorPassword === true ? "errorInput" : null}
+              className={passwordEgalConfirm === true ? "errorInput" : null}
             />
             {errorPassword && (
               <p className="error">merci de remplir le mot de passe</p>
+            )}
+            {passwordEgalConfirm && (
+              <p className="error">Les mots de passe ne sont pas identiques</p>
             )}
           </div>
           <div>
@@ -160,10 +170,12 @@ const Signup = () => {
               value={confirmPassword}
               onChange={handleConfirmPassword}
               className={errorConfirmPassword === true ? "errorInput" : null}
+              className={passwordEgalConfirm === true ? "errorInput" : null}
             />
             {errorConfirmPassword && (
               <p className="error">merci de remplir la confirmation</p>
             )}
+            {passwordEgalConfirm && <p className="error"></p>}
           </div>
         </div>
         <Input type="submit" value="S'inscrire" />
