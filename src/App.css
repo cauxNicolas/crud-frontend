@@ -35,7 +35,7 @@ textarea {
   padding: 10px;
   outline: none;
   font-size: 1rem;
-  width: 250px;
+  width: 300px;
   border: 1px solid #dadada;
   margin-top: 20px;
   resize: none;
@@ -116,7 +116,7 @@ input[type="submit"]:active {
 
 #signup input[type="email"],
 #signup textarea {
-  width: 540px;
+  width: 640px;
 }
 
 #signup input[type="submit"] {
