@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 // componenents
 import Input from "../components/Input";
@@ -13,6 +13,7 @@ const Signup = () => {
   const [textarea, setTextarea] = useState("aaaa");
   const [password, setPassword] = useState("a");
   const [confirmPassword, setConfirmPassword] = useState("a");
+  const [inscriptionOK, setInscriptionOk] = useState("");
   // error
   const [errorName, setErrorName] = useState(false);
   const [errorLastname, setErrorLastname] = useState(false);
@@ -21,6 +22,10 @@ const Signup = () => {
   const [errorPassword, setErrorPassword] = useState(false);
   const [errorConfirmPassword, setErrorConfirmPassword] = useState(false);
   const [passwordEgalConfirm, setPasswordEgalConfirm] = useState(false);
+  const [errorResponseData, setErrorResponseData] = useState("");
+
+  // setTimeout
+  useEffect(() => {}, []);
 
   // on récupère les valeurs
   const handleName = (event) => {
@@ -69,9 +74,14 @@ const Signup = () => {
             password,
             confirmPassword,
           });
-          console.log("->", response.data);
+          setErrorResponseData("");
+          setInscriptionOk(response.data.info);
+          // on remets à zéro le composant au bout de 3s
+          setTimeout(() => {
+            setInscriptionOk("");
+          }, 3000);
         } catch (error) {
-          console.log(error.response);
+          setErrorResponseData(`${email} ${error.response.data}`);
         }
       } else {
         setPasswordEgalConfirm(true);
@@ -103,7 +113,18 @@ const Signup = () => {
       <div className="bott60">
         <h1>Inscrivez-vous</h1>
       </div>
+
       <form id="signup" onSubmit={handleSubmit}>
+        {errorResponseData && (
+          <div id="infoError">
+            <p>{errorResponseData}</p>
+          </div>
+        )}
+        {inscriptionOK && (
+          <div id="infoOk">
+            <p>{inscriptionOK}</p>
+          </div>
+        )}
         <div className="flex">
           <div>
             <Input

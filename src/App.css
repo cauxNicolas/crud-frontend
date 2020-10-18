@@ -55,7 +55,7 @@ textarea::placeholder {
 }
 
 input[type="submit"] {
-  width: 100%;
+  width: calc(100% - 20px);
   background-color: #202020;
   color: white;
   cursor: pointer;
@@ -117,6 +117,24 @@ input[type="submit"]:active {
 #signup input[type="email"],
 #signup textarea {
   width: 540px;
+}
+
+#infoOk {
+  padding: 8px;
+  background-color: #cee8ce;
+  color: green;
+  border: 1px solid #aec5ae;
+  text-align: center;
+  width: calc(100% - 40px);
+}
+
+#infoError {
+  padding: 8px;
+  background-color: #ffe4e4;
+  color: red;
+  border: 1px solid #ffc4c4;
+  text-align: center;
+  width: calc(100% - 40px);
 }
 
 /* ERROR LOGIN */
