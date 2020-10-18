@@ -2,6 +2,8 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 // componenents
 import Input from "../components/Input";
+// bdd
+import axios from "axios";
 
 const Login = () => {
   const [email, setEmail] = useState("");
@@ -17,12 +19,18 @@ const Login = () => {
     setpassword(event.target.value);
   };
   // soumission du formulaire
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
     if (email !== "" && password !== "") {
-      alert("login envoyé en bdd");
-      setEmail("");
-      setpassword("");
+      try {
+        const response = await axios.post("http://localhost:3100/", {
+          email,
+          password,
+        });
+        console.log(response.data);
+      } catch (error) {
+        console.log(error.response.data);
+      }
     } else {
       if (email === "") {
         setErrorEmail(true);
