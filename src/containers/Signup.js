@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 // componenents
 import Input from "../components/Input";
 import Textarea from "../components/Textarea";
@@ -7,25 +7,27 @@ import Textarea from "../components/Textarea";
 import axios from "axios";
 
 const Signup = () => {
-  const [name, setName] = useState("a");
-  const [lastname, setLastname] = useState("a");
-  const [email, setEmail] = useState("a@a.fr");
-  const [textarea, setTextarea] = useState("aaaa");
-  const [password, setPassword] = useState("a");
-  const [confirmPassword, setConfirmPassword] = useState("a");
+  const [name, setName] = useState("");
+  const [lastname, setLastname] = useState("");
+  const [email, setEmail] = useState("");
+  const [textarea, setTextarea] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
   const [inscriptionOK, setInscriptionOk] = useState("");
   // error
   const [errorName, setErrorName] = useState(false);
   const [errorLastname, setErrorLastname] = useState(false);
   const [errorEmail, setErrorEmail] = useState(false);
   const [errorTextarea, setErrorTextarea] = useState(false);
+  const [errorPass, setErrorPass] = useState(false);
   const [errorPassword, setErrorPassword] = useState(false);
   const [errorConfirmPassword, setErrorConfirmPassword] = useState(false);
   const [passwordEgalConfirm, setPasswordEgalConfirm] = useState(false);
+  const [passwordLength, setPasswordLength] = useState(false);
   const [errorResponseData, setErrorResponseData] = useState("");
 
-  // setTimeout
-  useEffect(() => {}, []);
+  // redirection
+  const history = useHistory();
 
   // on récupère les valeurs
   const handleName = (event) => {
@@ -64,27 +66,39 @@ const Signup = () => {
       password !== "" &&
       confirmPassword !== ""
     ) {
-      if (password === confirmPassword) {
-        try {
-          const response = await axios.post("http://localhost:3100/signup", {
-            name,
-            lastname,
-            email,
-            textarea,
-            password,
-            confirmPassword,
-          });
-          setErrorResponseData("");
-          setInscriptionOk(response.data.info);
-          // on remets à zéro le composant au bout de 3s
-          setTimeout(() => {
-            setInscriptionOk("");
-          }, 3000);
-        } catch (error) {
-          setErrorResponseData(`${email} ${error.response.data}`);
+      if (password.length >= 5 || confirmPassword.length >= 5) {
+        if (password === confirmPassword) {
+          try {
+            const response = await axios.post("http://localhost:3100/signup", {
+              name,
+              lastname,
+              email,
+              textarea,
+              password,
+            });
+            setErrorResponseData("");
+            setName("");
+            setLastname("");
+            setEmail("");
+            setTextarea("");
+            setPassword("");
+            setConfirmPassword("");
+            setInscriptionOk(response.data.info);
+            // on remets à zéro le composant au bout de 4s
+            setTimeout(() => {
+              setInscriptionOk("");
+              history.push("/");
+            }, 4000);
+          } catch (error) {
+            setErrorResponseData(`${email} ${error.response.data}`);
+          }
+        } else {
+          setErrorPass(true);
+          setPasswordEgalConfirm(true);
         }
       } else {
-        setPasswordEgalConfirm(true);
+        setErrorPass(true);
+        setPasswordLength(true);
       }
     } else {
       if (name === "") {
@@ -100,9 +114,11 @@ const Signup = () => {
         setErrorTextarea(true);
       }
       if (password === "") {
+        setErrorPass(true);
         setErrorPassword(true);
       }
       if (confirmPassword === "") {
+        setErrorPass(true);
         setErrorConfirmPassword(true);
       }
     }
@@ -174,8 +190,7 @@ const Signup = () => {
               placeholder="votre mot de passe"
               value={password}
               onChange={handlePassword}
-              className={errorPassword === true ? "errorInput" : null}
-              className={passwordEgalConfirm === true ? "errorInput" : null}
+              className={errorPass === true ? "errorInput" : null}
             />
             {errorPassword && (
               <p className="error">merci de remplir le mot de passe</p>
@@ -183,6 +198,7 @@ const Signup = () => {
             {passwordEgalConfirm && (
               <p className="error">Les mots de passe ne sont pas identiques</p>
             )}
+            {passwordLength && <p className="error">Minimum 5 lettres</p>}
           </div>
           <div>
             <Input
@@ -190,8 +206,7 @@ const Signup = () => {
               placeholder="confirmez votre mot de passe"
               value={confirmPassword}
               onChange={handleConfirmPassword}
-              className={errorConfirmPassword === true ? "errorInput" : null}
-              className={passwordEgalConfirm === true ? "errorInput" : null}
+              className={errorPass === true ? "errorInput" : null}
             />
             {errorConfirmPassword && (
               <p className="error">merci de remplir la confirmation</p>
