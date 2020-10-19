@@ -141,6 +141,11 @@ input[type="submit"]:active {
   width: calc(100% - 40px);
 }
 
+#login #infoError {
+  /* page login*/
+  width: calc(100% - 20px);
+}
+
 /* ERROR LOGIN */
 .errorInput {
   border: 1px solid red;

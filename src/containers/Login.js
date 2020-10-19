@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 // componenents
 import Input from "../components/Input";
 // bdd
@@ -8,8 +8,12 @@ import axios from "axios";
 const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setpassword] = useState("");
+  // error
   const [errorEmail, setErrorEmail] = useState(false);
   const [errorPassword, setErrorPassword] = useState(false);
+  const [errorResponseData, setResponseData] = useState("");
+  // navigation
+  const history = useHistory();
 
   const handleEmail = (event) => {
     setEmail(event.target.value);
@@ -27,9 +31,11 @@ const Login = () => {
           email,
           password,
         });
-        console.log(response.data);
+        if (response.status === 200) {
+          history.push("/home");
+        }
       } catch (error) {
-        console.log(error.response.data);
+        setResponseData(error.response.data);
       }
     } else {
       if (email === "") {
@@ -47,6 +53,11 @@ const Login = () => {
         <h1>Bienvenue sur la home page Login</h1>
       </div>
       <form id="login" onSubmit={handleSubmit}>
+        {errorResponseData && (
+          <div id="infoError">
+            <p>{errorResponseData}</p>
+          </div>
+        )}
         <Input
           type="email"
           placeholder="votre email"

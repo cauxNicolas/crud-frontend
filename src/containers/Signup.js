@@ -25,7 +25,6 @@ const Signup = () => {
   const [passwordEgalConfirm, setPasswordEgalConfirm] = useState(false);
   const [passwordLength, setPasswordLength] = useState(false);
   const [errorResponseData, setErrorResponseData] = useState("");
-
   // redirection
   const history = useHistory();
 
@@ -76,13 +75,6 @@ const Signup = () => {
               textarea,
               password,
             });
-            setErrorResponseData("");
-            setName("");
-            setLastname("");
-            setEmail("");
-            setTextarea("");
-            setPassword("");
-            setConfirmPassword("");
             setInscriptionOk(response.data.info);
             // on remets à zéro le composant au bout de 4s
             setTimeout(() => {
