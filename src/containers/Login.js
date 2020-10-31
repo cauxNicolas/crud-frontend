@@ -35,6 +35,7 @@ const Login = () => {
           history.push("/home");
         }
       } catch (error) {
+        console.log(error.response.data);
         setResponseData(error.response.data);
       }
     } else {
