@@ -157,6 +157,10 @@ input[type="submit"]:active {
   font-weight: 600;
 }
 
+/* PAGE HOME */
+#home {
+}
+
 /* RESPONSIVE */
 @media (max-width: 768px) {
   /* SIGNUP */
