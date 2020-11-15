@@ -8,23 +8,23 @@ import Signup from "./containers/Signup";
 import Home from "./containers/Home";
 
 function App() {
-  return (
-    <div>
-      <Router>
-        <Switch>
-          <Route path="/signup">
-            <Signup />
-          </Route>
-          <Route path="/home">
-            <Home />
-          </Route>
-          <Route path="/">
-            <Login />
-          </Route>
-        </Switch>
-      </Router>
-    </div>
-  );
+    return (
+        <div>
+            <Router>
+                <Switch>
+                    <Route path="/signup">
+                        <Signup />
+                    </Route>
+                    <Route path="/home">
+                        <Home />
+                    </Route>
+                    <Route path="/">
+                        <Login />
+                    </Route>
+                </Switch>
+            </Router>
+        </div>
+    );
 }
 
 export default App;
